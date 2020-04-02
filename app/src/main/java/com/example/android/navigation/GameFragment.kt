@@ -31,38 +31,38 @@ class GameFragment : Fragment() {
             val text: String,
             val answers: List<String>)
 
-    // The first answer is the correct one.  We randomize the answers before showing the text.
-    // All questions must have four answers.  We'd want these to contain references to string
-    // resources so we could internationalize. (Or better yet, don't define the questions in code...)
+    /*  The first answer is the correct one.  We randomize the answers before showing the text.
+    All questions must have four answers.  We'd want these to contain references to string
+    resources so we could internationalize. (Or better yet, don't define the questions in code...)*/
     private val questions: MutableList<Question> = mutableListOf(
-            Question(text = "What is Android Jetpack?",
-                    answers = listOf("All of these", "Tools", "Documentation", "Libraries")),
-            Question(text = "What is the base class for layouts?",
-                    answers = listOf("ViewGroup", "ViewSet", "ViewCollection", "ViewRoot")),
-            Question(text = "What layout do you use for complex screens?",
-                    answers = listOf("ConstraintLayout", "GridLayout", "LinearLayout", "FrameLayout")),
-            Question(text = "What do you use to push structured data into a layout?",
-                    answers = listOf("Data binding", "Data pushing", "Set text", "An OnClick method")),
-            Question(text = "What method do you use to inflate layouts in fragments?",
-                    answers = listOf("onCreateView()", "onActivityCreated()", "onCreateLayout()", "onInflateLayout()")),
-            Question(text = "What's the build system for Android?",
-                    answers = listOf("Gradle", "Graddle", "Grodle", "Groyle")),
-            Question(text = "Which class do you use to create a vector drawable?",
-                    answers = listOf("VectorDrawable", "AndroidVectorDrawable", "DrawableVector", "AndroidVector")),
-            Question(text = "Which one of these is an Android navigation component?",
-                    answers = listOf("NavController", "NavCentral", "NavMaster", "NavSwitcher")),
-            Question(text = "Which XML element lets you register an activity with the launcher activity?",
-                    answers = listOf("intent-filter", "app-registry", "launcher-registry", "app-launcher")),
-            Question(text = "What do you use to mark a layout for data binding?",
-                    answers = listOf("<layout>", "<binding>", "<data-binding>", "<dbinding>"))
+            Question(text = "Which file extension is used to save Kotlin files?",
+                    answers = listOf(".kt or .kts", ".kot", ".java", ".c")),
+            Question(text = "How to make a multi lined comment in Kotlin?",
+                    answers = listOf("/* */", "/ /", "//", "## ##")),
+            Question(text = "How do you get the length of a string in Kotlin?",
+                    answers = listOf("str.length", "length(str)", "str.lengthOf", "strlen(str)")),
+            Question(text = "Which of these is used to handle null exceptions in Kotlin?",
+                    answers = listOf("Elvis Operator", "Range", "Lambda function", "Sealed Class")),
+            Question(text = "What is the default behavior of Kotlin classes?",
+                    answers = listOf("All classes are final", "All classes are public", "All classes are sealed", "All classes are abstract")),
+            Question(text = "Which of these is true for Kotlin variables?",
+                    answers = listOf("val corresponds to final variable in Java", "var cannot be changed", "val can be changed", "All variables are immutable by default")),
+            Question(text = "Kotlin is developed by?",
+                    answers = listOf("JetBrains", "Google", "Apple", "Microsoft")),
+            Question(text = "Which other programing language is Kotlin most compatible with?",
+                    answers = listOf("Java", "c", "Python", "Ruby")),
+            Question(text = "Which of these features is only found in Java, not Kotlin?",
+                    answers = listOf("Static members", "Null Safety", "Operator Overloading", "Smart Casts")),
+            Question(text = "What are Kotlin coroutines?",
+                    answers = listOf("They provide asynchronous code without thread blocking.", "It's Kotlin's term for class methods",
+                            "They are functions which accept other functions as arguments", "Kotlin's term for macros"))
     )
-
 
 
     lateinit var currentQuestion: Question
     lateinit var answers: MutableList<String>
     private var questionIndex = 0
-    private val numQuestions = Math.min((questions.size + 1) / 2, 3)
+    private val numQuestions = Math.min((questions.size + 1) / 2, 5)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
