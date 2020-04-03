@@ -20,12 +20,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameOverBinding
 
-class GameOverFragment : Fragment() {
+class  GameOverFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,6 +36,10 @@ class GameOverFragment : Fragment() {
         binding.tryAgainButton.setOnClickListener { view: View ->
             view.findNavController().navigate(GameOverFragmentDirections.actionGameOverFragmentToGameFragment())
         }
+
+        val args = GameWonFragmentArgs.fromBundle(arguments!!)
+        Toast.makeText(context, "NumCorrect: ${args.numCorrect}, NumWrong: ${args.numQuestions}", Toast.LENGTH_LONG).show()
+
         return binding.root
     }
 }

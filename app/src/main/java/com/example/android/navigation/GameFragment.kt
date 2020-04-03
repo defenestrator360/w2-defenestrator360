@@ -62,7 +62,9 @@ class GameFragment : Fragment() {
     lateinit var currentQuestion: Question
     lateinit var answers: MutableList<String>
     private var questionIndex = 0
+    private var correctAnswers = 0
     private val numQuestions = Math.min((questions.size + 1) / 2, 5)
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -89,25 +91,28 @@ class GameFragment : Fragment() {
                     R.id.thirdAnswerRadioButton -> answerIndex = 2
                     R.id.fourthAnswerRadioButton -> answerIndex = 3
                 }
-                // The first answer in the original question is always the correct one, so if our
-                // answer matches, we have the correct answer.
+
+                questionIndex++
                 if (answers[answerIndex] == currentQuestion.answers[0]) {
-                    questionIndex++
-                    // Advance to the next question
-                    if (questionIndex < numQuestions) {
-                        currentQuestion = questions[questionIndex]
-                        setQuestion()
-                        binding.invalidateAll()
-                    } else {
+                    correctAnswers++
+                }
+
+                if (questionIndex < numQuestions){
+                    currentQuestion = questions[questionIndex]
+                    setQuestion()
+                    binding.invalidateAll()
+
+                } else {
+                    if (correctAnswers == numQuestions){
                         // We've won!  Navigate to the gameWonFragment.
                         view.findNavController()
                                 .navigate(GameFragmentDirections
                                         .actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
+                    } else {
+                        // Game over! A wrong answer sends us to the gameOverFragment.
+                        view.findNavController()
+                                .navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment(numQuestions - correctAnswers, correctAnswers))
                     }
-                } else {
-                    // Game over! A wrong answer sends us to the gameOverFragment.
-                    view.findNavController()
-                            .navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment())
                 }
             }
         }
